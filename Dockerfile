@@ -3,6 +3,10 @@ ARG TARGET_ARCH
 ENV TARGET_ARCH=amd64
 FROM ${TARGET_ARCH}/python:3.10-alpine3.16
 
+ARG TARGET_ARCH
+ENV TARGET_ARCH=amd64
+FROM ${TARGET_ARCH}/python:3.10-alpine3.16
+
 USER root
 
 EXPOSE 80 443
@@ -30,5 +34,4 @@ RUN    mkdir uacme
     && python setup.py install
     && cd ..
 
-# lauch ualpn in server mode:
-CMD ualpn -v -d -u nobody:nogroup -c 192.168.11.20@4444 -S 666
+ENTRYPOINT certbot
